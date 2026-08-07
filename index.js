@@ -122,7 +122,10 @@ services.forEach((service, index) => {
       
       const requestObjBase64url = Buffer.from(JSON.stringify({
         url: "https://api.m2mcent.com" + req.path,
-        method: req.method
+        method: req.method,
+        currency: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        amount: amountUSDC,
+        recipient: payTo
       })).toString('base64url');
       
       res.setHeader('WWW-Authenticate', `Payment realm="api.m2mcent.com", id="${chalId}", method="x402", intent="payment", expires="${expires}", request="${requestObjBase64url}"`);  
