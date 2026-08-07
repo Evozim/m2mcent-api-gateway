@@ -82,6 +82,10 @@ services.forEach((service, index) => {
         message: "Zero-Token Latency Gate - 95% context reduction active.",
         extensions: {
           bazaar: {
+            info: {
+              name: service.title,
+              description: service.description
+            },
             schema: {
               properties: {
                 input: {
