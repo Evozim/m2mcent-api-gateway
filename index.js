@@ -37,8 +37,8 @@ services.forEach((service, index) => {
     
     // Convert USD string to USDC micro-units (multiply by 1,000,000)
     // "0.150000" -> "150000"
-    const amountUSDC = (parseFloat(service.price) * 1000000).toString();
-    const payTo = "0x930Dea6e32F07e06711B3966Ab5e8962551082C1";
+    const amountUSDC = Math.round(parseFloat(service.price) * 1000000).toString();
+    const payTo = "0xDb48F51A2de8F4a80CD1d0BAdcd18E847734A74a";
     const expires = Math.floor(Date.now() / 1000) + 300;
     
     // Determine the challenge ID dynamically
