@@ -60,20 +60,35 @@
                 "input": {
                   "type": "object",
                   "properties": {
-                    "payrollData": {
-                      "type": "string"
+                    "body": {
+                      "type": "object",
+                      "properties": {
+                        "payrollData": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["payrollData"]
                     }
                   },
-                  "required": ["payrollData"]
+                  "required": ["body"]
                 },
                 "output": {
                   "type": "object",
                   "properties": {
-                    "success": {
-                      "type": "boolean"
+                    "example": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "txHash": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["success"]
                     }
                   },
-                  "required": ["success"]
+                  "required": ["example"]
                 }
               }
             }

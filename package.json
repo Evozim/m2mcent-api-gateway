@@ -7,6 +7,8 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "@agentcash/discovery": "^1.7.5",
+    "cors": "^2.8.6",
     "express": "^4.18.2"
   }
 }
