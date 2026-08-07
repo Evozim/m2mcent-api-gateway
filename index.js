@@ -31,7 +31,7 @@ app.all('*', (req, res) => {
     accepts: [
       {
         scheme: "exact",
-        network: "eip155:8453", // CAIP-2 format for Base Mainnet!
+        network: "eip155:8453", // CAIP-2 format for Base Mainnet
         asset: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", // USDC on Base Mainnet
         amount: "150000", // 0.15 USDC in 6-decimal atomic units
         payTo: payTo,
@@ -43,7 +43,6 @@ app.all('*', (req, res) => {
       description: "Agentic Payroll Processing Service",
       mimeType: "application/json"
     },
-    // Backward compatibility & legacy fields
     payTo: payTo,
     amount: "0.15",
     currency: "USDC",
@@ -59,7 +58,8 @@ app.all('*', (req, res) => {
   const payPayloadBase64 = Buffer.from(JSON.stringify(payPayload)).toString('base64');
   res.setHeader('PAYMENT-REQUIRED', payPayloadBase64);
   res.setHeader('Payment-Required', payPayloadBase64);
-  res.setHeader('WWW-Authenticate', `x402 payTo="${payTo}", amount="150000", asset="USDC", network="eip155:8453"`);
+  // MPP/x402 WWW-Authenticate header spec: Payment realm with location/token parameters
+  res.setHeader('WWW-Authenticate', `Payment realm="api.m2mcent.com", token="x402"`);
   
   res.status(402).json({
     x402Version: 2,
