@@ -47,7 +47,7 @@
             {
               "x402": {
                 "payTo": "0x930Dea6e32F07e06711B3966Ab5e8962551082C1",
-                "network": "base",
+                "network": "eip155:8453",
                 "currency": "USDC"
               }
             }
@@ -61,10 +61,11 @@
                 "type": "object",
                 "properties": {
                   "payrollData": {
-                    "type": "object",
-                    "description": "Payroll execution parameters"
+                    "type": "string",
+                    "description": "JSON payroll data"
                   }
-                }
+                },
+                "required": ["payrollData"]
               }
             }
           }
@@ -77,10 +78,14 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "txHash": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "required": ["success"]
                 }
               }
             }
