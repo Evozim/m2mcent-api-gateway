@@ -90,11 +90,18 @@ services.forEach((service, index) => {
               input: {
                 type: "application/json",
                 method: "POST",
-                params: [service.inputProperty]
+                params: [service.inputProperty],
+                example: {
+                  [service.inputProperty]: "example data"
+                }
               },
               output: {
                 type: "application/json",
-                returns: [service.outputProperty]
+                returns: [service.outputProperty],
+                example: {
+                  [service.outputProperty]: true,
+                  txHash: "0xMockTransactionHash1234567890abcdef"
+                }
               }
             },
             schema: {
