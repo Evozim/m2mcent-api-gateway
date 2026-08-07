@@ -3,7 +3,10 @@
   "info": {
     "title": "M2MCent Ecosystem 1000 Agentic Services",
     "description": "The largest decentralized Machine-to-Machine API ecosystem powered by the x402 standard.",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "contact": {
+      "email": "contact@m2mcent.com"
+    }
   },
   "servers": [
     {
