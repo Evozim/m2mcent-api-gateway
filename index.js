@@ -32,7 +32,7 @@ app.get('/.well-known/openapi.json', (req, res) => {
 
 // Create dynamic route for each service
 services.forEach((service, index) => {
-  app.post(service.path, (req, res) => {
+  app.all(service.path, (req, res) => {
     const authHeader = req.headers['authorization'];
     
     // Convert USD string to USDC micro-units (multiply by 1,000,000)
