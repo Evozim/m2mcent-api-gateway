@@ -53,6 +53,30 @@
             }
           ]
         },
+        "x-bazaar": {
+          "schema": {
+            "properties": {
+              "input": {
+                "type": "object",
+                "properties": {
+                  "payrollData": {
+                    "type": "string"
+                  }
+                },
+                "required": ["payrollData"]
+              },
+              "output": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  }
+                },
+                "required": ["success"]
+              }
+            }
+          }
+        },
         "requestBody": {
           "required": true,
           "content": {
@@ -92,32 +116,6 @@
           },
           "402": {
             "description": "Payment Required"
-          }
-        },
-        "extensions": {
-          "bazaar": {
-            "schema": {
-              "properties": {
-                "input": {
-                  "type": "object",
-                  "properties": {
-                    "payrollData": {
-                      "type": "string"
-                    }
-                  },
-                  "required": ["payrollData"]
-                },
-                "output": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    }
-                  },
-                  "required": ["success"]
-                }
-              }
-            }
           }
         }
       }
