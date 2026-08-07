@@ -120,12 +120,12 @@ services.forEach((service, index) => {
       res.setHeader('PAYMENT-REQUIRED', payPayloadBase64);
       res.setHeader('Payment-Required', payPayloadBase64);
       
-      const requestObjStr = JSON.stringify({
+      const requestObjBase64url = Buffer.from(JSON.stringify({
         url: "https://api.m2mcent.com" + req.path,
         method: req.method
-      }).replace(/"/g, '\\"');
+      })).toString('base64url');
       
-      res.setHeader('WWW-Authenticate', `Payment realm="api.m2mcent.com", id="${chalId}", method="x402", intent="payment", expires="${expires}", request="${requestObjStr}"`);  
+      res.setHeader('WWW-Authenticate', `Payment realm="api.m2mcent.com", id="${chalId}", method="x402", intent="payment", expires="${expires}", request="${requestObjBase64url}"`);  
       
       return res.status(402).json({
         x402Version: 2,
