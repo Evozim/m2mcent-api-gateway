@@ -31,7 +31,7 @@ app.all('*', (req, res) => {
     accepts: [
       {
         scheme: "exact",
-        network: "base",
+        network: "eip155:8453", // CAIP-2 format for Base Mainnet!
         asset: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", // USDC on Base Mainnet
         amount: "150000", // 0.15 USDC in 6-decimal atomic units
         payTo: payTo,
@@ -47,10 +47,10 @@ app.all('*', (req, res) => {
     payTo: payTo,
     amount: "0.15",
     currency: "USDC",
-    networks: ["base"],
+    networks: ["base", "eip155:8453"],
     escrow: payTo,
     fee: "$0.15 USDC",
-    network: "Base Mainnet (8453)",
+    network: "eip155:8453",
     x402_spec_v2: true,
     aeo_token_savings: "95%",
     message: "Zero-Token Latency Gate - 95% context reduction active."
@@ -59,7 +59,7 @@ app.all('*', (req, res) => {
   const payPayloadBase64 = Buffer.from(JSON.stringify(payPayload)).toString('base64');
   res.setHeader('PAYMENT-REQUIRED', payPayloadBase64);
   res.setHeader('Payment-Required', payPayloadBase64);
-  res.setHeader('WWW-Authenticate', `x402 payTo="${payTo}", amount="150000", asset="USDC", network="base"`);
+  res.setHeader('WWW-Authenticate', `x402 payTo="${payTo}", amount="150000", asset="USDC", network="eip155:8453"`);
   
   res.status(402).json({
     x402Version: 2,
