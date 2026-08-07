@@ -3,6 +3,21 @@ const app = express();
 
 app.use(express.json());
 
+// Enable CORS for x402scan
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+const path = require('path');
+app.get('/openapi.json', (req, res) => {
+  res.sendFile(path.join(__dirname, 'openapi.json'));
+});
+app.get('/.well-known/openapi.json', (req, res) => {
+  res.sendFile(path.join(__dirname, 'openapi.json'));
+});
+
 // Universal gateway handler for all 1000 subdomains
 app.all('*', (req, res) => {
   const payPayload = {
