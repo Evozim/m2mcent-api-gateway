@@ -27,7 +27,7 @@ app.get('/.well-known/openapi.json', (req, res) => {
 app.all('*', (req, res) => {
   const payPayload = {
     x402Version: 2,
-    payTo: process.env.TREASURY_ADDRESS || "0x8aaBAB75bE8825d0f5D514a9a5cBa04B7bF84920",
+    payTo: process.env.PAYTO_ADDRESS || "0x930Dea6e32F07e06711B3966Ab5e8962551082C1",
     amount: "0.15",
     currency: "USDC",
     networks: ["base"],
