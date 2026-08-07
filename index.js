@@ -86,7 +86,16 @@ services.forEach((service, index) => {
           bazaar: {
             info: {
               name: service.title,
-              description: service.description
+              description: service.description,
+              input: {
+                type: "application/json",
+                method: "POST",
+                params: [service.inputProperty]
+              },
+              output: {
+                type: "application/json",
+                returns: [service.outputProperty]
+              }
             },
             schema: {
               properties: {
