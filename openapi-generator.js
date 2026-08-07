@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-
+const { declareDiscoveryExtension } = require('@x402/extensions/bazaar');
 function generateOpenApi(services, baseUrl = "https://api.m2mcent.com") {
   const baseSpec = {
     "openapi": "3.1.0",
@@ -60,47 +60,30 @@ function generateOpenApi(services, baseUrl = "https://api.m2mcent.com") {
             }
           ]
         },
-        "extensions": {
-          "bazaar": {
-            "info": {
-              "name": service.title,
-              "description": service.description,
-              "input": {
-                "type": "application/json",
-                "method": "POST",
-                "params": [service.inputProperty],
-                "example": {
-                  [service.inputProperty]: "example data"
-                }
-              },
-              "output": {
-                "type": "application/json",
-                "returns": [service.outputProperty],
-                "example": {
-                  [service.outputProperty]: true,
-                  "txHash": "0xMockTransactionHash1234567890abcdef"
-                }
-              }
+        "extensions": (() => {
+          const ext = declareDiscoveryExtension({
+            method: "POST",
+            bodyType: "json",
+            input: {
+              [service.inputProperty]: "example data"
             },
-            "schema": {
-              "input": {
-                "body": {
-                  "type": "object",
-                  "properties": {
-                    [service.inputProperty]: { "type": "string" }
-                  },
-                  "required": [service.inputProperty]
-                }
+            inputSchema: {
+              properties: {
+                [service.inputProperty]: { type: "string" }
               },
-              "output": {
-                "example": {
-                  [service.outputProperty]: true,
-                  "txHash": "0xMockTransactionHash1234567890abcdef"
-                }
+              required: [service.inputProperty]
+            },
+            output: {
+              example: {
+                [service.outputProperty]: true,
+                txHash: "0xMockTransactionHash1234567890abcdef"
               }
             }
-          }
-        },
+          });
+          ext.bazaar.info.name = service.title;
+          ext.bazaar.info.description = service.description;
+          return ext;
+        })(),
         "requestBody": {
           "required": true,
           "content": {

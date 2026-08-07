@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "@agentcash/discovery": "^1.7.5",
+    "@coinbase/cdp-sdk": "^1.55.0",
+    "@x402/extensions": "^2.21.0",
     "cors": "^2.8.6",
     "express": "^4.18.2"
   }
