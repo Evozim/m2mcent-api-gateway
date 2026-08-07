@@ -39,7 +39,10 @@ app.all('*', (req, res) => {
     message: "Zero-Token Latency Gate - 95% context reduction active."
   };
 
-  res.setHeader('PAYMENT-REQUIRED', Buffer.from(JSON.stringify(payPayload)).toString('base64'));
+  const payPayloadBase64 = Buffer.from(JSON.stringify(payPayload)).toString('base64');
+  res.setHeader('PAYMENT-REQUIRED', payPayloadBase64);
+  res.setHeader('Payment-Required', payPayloadBase64);
+  res.setHeader('WWW-Authenticate', `x402 payTo="${payPayload.payTo}", amount="${payPayload.amount}", currency="${payPayload.currency}", network="base"`);
   res.status(402).json({
     error: "Payment Required",
     code: "x402_auth_missing",

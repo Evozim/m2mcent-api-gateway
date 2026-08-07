@@ -14,6 +14,12 @@
       "description": "M2MCent API Gateway"
     }
   ],
+  "x-x402-specification": {
+    "version": 2,
+    "payTo": "0x930Dea6e32F07e06711B3966Ab5e8962551082C1",
+    "network": "base",
+    "currency": "USDC"
+  },
   "paths": {
     "/agentic-payroll-processor-mcp/api/process": {
       "post": {
