@@ -49,6 +49,29 @@ services.forEach((service, index) => {
     const chalId = `chal_m2mcent_${String(index + 1).padStart(2, '0')}`;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      const discoveryExt = declareDiscoveryExtension({
+        method: "POST",
+        bodyType: "json",
+        input: {
+          [service.inputProperty]: "example data"
+        },
+        inputSchema: {
+          properties: {
+            [service.inputProperty]: { type: "string" }
+          },
+          required: [service.inputProperty]
+        },
+        output: {
+          example: {
+            [service.outputProperty]: true,
+            txHash: "0xMockTransactionHash1234567890abcdef"
+          }
+        }
+      });
+
+      discoveryExt.bazaar.info.name = service.title;
+      discoveryExt.bazaar.info.description = service.description;
+
       const payPayload = {
         x402Version: 2,
         accepts: [
@@ -84,37 +107,8 @@ services.forEach((service, index) => {
         x402_spec_v2: true,
         aeo_token_savings: "95%",
         message: "Zero-Token Latency Gate - 95% context reduction active.",
-          const discoveryExt = declareDiscoveryExtension({
-            method: "POST",
-            bodyType: "json",
-            input: {
-              [service.inputProperty]: "example data"
-            },
-            inputSchema: {
-              properties: {
-                [service.inputProperty]: { type: "string" }
-              },
-              required: [service.inputProperty]
-            },
-            output: {
-              example: {
-                [service.outputProperty]: true,
-                txHash: "0xMockTransactionHash1234567890abcdef"
-              }
-            }
-          });
-
-          discoveryExt.bazaar.info.name = service.title;
-          discoveryExt.bazaar.info.description = service.description;
-
-          const payPayload = {
-            network: "base",
-            contract: "0xDb48F51A2de8F4a80CD1d0BAdcd18E847734A74a",
-            token: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-            amount: service.amount,
-            recipient: "0x8aaBAB75bE8825d0f5D514a9a5cBa04B7bF84920",
-            extensions: discoveryExt
-          };
+        extensions: discoveryExt
+      };
 
           const payPayloadBase64 = Buffer.from(JSON.stringify(payPayload)).toString('base64');
       res.setHeader('PAYMENT-REQUIRED', payPayloadBase64);
