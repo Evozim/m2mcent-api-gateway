@@ -7,7 +7,9 @@ const { generateOpenApi } = require('./openapi-generator');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+  exposedHeaders: ['Payment-Required', 'WWW-Authenticate']
+}));
 app.use(express.json());
 
 // Load services

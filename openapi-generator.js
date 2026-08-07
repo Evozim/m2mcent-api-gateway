@@ -62,6 +62,19 @@ function generateOpenApi(services, baseUrl = "https://api.m2mcent.com") {
         },
         "extensions": {
           "bazaar": {
+            "info": {
+              "name": service.title,
+              "description": service.description,
+              "input": {
+                "type": "application/json",
+                "method": "POST",
+                "params": [service.inputProperty]
+              },
+              "output": {
+                "type": "application/json",
+                "returns": [service.outputProperty]
+              }
+            },
             "schema": {
               "properties": {
                 "input": {
