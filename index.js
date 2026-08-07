@@ -24,17 +24,27 @@ app.get('/.well-known/openapi.json', (req, res) => {
 // Universal gateway handler for all endpoints
 app.all('*', (req, res) => {
   const payTo = process.env.PAYTO_ADDRESS || "0x930Dea6e32F07e06711B3966Ab5e8962551082C1";
+  const now = Math.floor(Date.now() / 1000);
+  const expires = now + 3600;
 
   // Full x402 v2 protocol payload according to Coinbase / Merit Systems specification
   const payPayload = {
     x402Version: 2,
     accepts: [
       {
+        id: "chal_m2mcent_01",
+        method: "x402",
+        intent: "payment",
         scheme: "exact",
         network: "eip155:8453", // CAIP-2 format for Base Mainnet
         asset: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", // USDC on Base Mainnet
         amount: "150000", // 0.15 USDC in 6-decimal atomic units
         payTo: payTo,
+        expires: expires,
+        request: {
+          url: "https://api.m2mcent.com" + req.path,
+          method: req.method
+        },
         maxTimeoutSeconds: 300
       }
     ],
@@ -58,8 +68,7 @@ app.all('*', (req, res) => {
   const payPayloadBase64 = Buffer.from(JSON.stringify(payPayload)).toString('base64');
   res.setHeader('PAYMENT-REQUIRED', payPayloadBase64);
   res.setHeader('Payment-Required', payPayloadBase64);
-  // MPP/x402 WWW-Authenticate header spec: Payment realm with location/token parameters
-  res.setHeader('WWW-Authenticate', `Payment realm="api.m2mcent.com", token="x402"`);
+  res.setHeader('WWW-Authenticate', `Payment realm="api.m2mcent.com", id="chal_m2mcent_01", method="x402", intent="payment", expires="${expires}"`);
   
   res.status(402).json({
     x402Version: 2,
