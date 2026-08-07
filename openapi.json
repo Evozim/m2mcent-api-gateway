@@ -53,26 +53,28 @@
             }
           ]
         },
-        "x-bazaar": {
-          "schema": {
-            "properties": {
-              "input": {
-                "type": "object",
-                "properties": {
-                  "payrollData": {
-                    "type": "string"
-                  }
+        "extensions": {
+          "bazaar": {
+            "schema": {
+              "properties": {
+                "input": {
+                  "type": "object",
+                  "properties": {
+                    "payrollData": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["payrollData"]
                 },
-                "required": ["payrollData"]
-              },
-              "output": {
-                "type": "object",
-                "properties": {
-                  "success": {
-                    "type": "boolean"
-                  }
-                },
-                "required": ["success"]
+                "output": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": ["success"]
+                }
               }
             }
           }
