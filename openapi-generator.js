@@ -76,33 +76,19 @@ function generateOpenApi(services, baseUrl = "https://api.m2mcent.com") {
               }
             },
             "schema": {
-              "properties": {
-                "input": {
+              "input": {
+                "body": {
                   "type": "object",
                   "properties": {
-                    "body": {
-                      "type": "object",
-                      "properties": {
-                        [service.inputProperty]: { "type": "string" }
-                      },
-                      "required": [service.inputProperty]
-                    }
+                    [service.inputProperty]: { "type": "string" }
                   },
-                  "required": ["body"]
-                },
-                "output": {
-                  "type": "object",
-                  "properties": {
-                    "example": {
-                      "type": "object",
-                      "properties": {
-                        [service.outputProperty]: { "type": "boolean" },
-                        "txHash": { "type": "string" }
-                      },
-                      "required": [service.outputProperty]
-                    }
-                  },
-                  "required": ["example"]
+                  "required": [service.inputProperty]
+                }
+              },
+              "output": {
+                "example": {
+                  [service.outputProperty]: true,
+                  "txHash": "0xMockTransactionHash1234567890abcdef"
                 }
               }
             }
