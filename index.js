@@ -41,7 +41,7 @@ app.get('/.well-known/erc8004.json', (req, res) => {
     description: "Decentralized Escrow API Gateway for 1,000 High-Priority Agentic Endpoints.",
     version: "1.0.0",
     identity: {
-      address: "0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc",
+      address: "0x8aaBAB75bE8825d0f5D514a9a5cBa04B7bF84920",
       publicKey: "M2MCent-Treasury-Key",
       domain: "api.m2mcent.com"
     },
