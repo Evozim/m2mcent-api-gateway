@@ -41,7 +41,7 @@ app.get('/.well-known/erc8004.json', (req, res) => {
     description: "Decentralized Escrow API Gateway for 1,000 High-Priority Agentic Endpoints.",
     version: "1.0.0",
     identity: {
-      address: "0x8aaBAB75bE8825d0f5D514a9a5cBa04B7bF84920",
+      address: "0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc",
       publicKey: "M2MCent-Treasury-Key",
       domain: "api.m2mcent.com"
     },
@@ -73,7 +73,7 @@ services.forEach((service, index) => {
     // Convert USD string to USDC micro-units (multiply by 1,000,000)
     // "0.150000" -> "150000"
     const amountUSDC = Math.round(parseFloat(service.price) * 1000000).toString();
-    const payTo = "0xDb48F51A2de8F4a80CD1d0BAdcd18E847734A74a";
+    const payTo = "0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc"; // Cartera 5 (Treasury)
     const expires = Math.floor(Date.now() / 1000) + 300;
     
     // Determine the challenge ID dynamically
