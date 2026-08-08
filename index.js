@@ -34,6 +34,37 @@ app.get('/.well-known/openapi.json', (req, res) => {
   res.json(openApiSpec);
 });
 
+// ERC-8004 Trustless Agents Metadata Standard
+app.get('/.well-known/erc8004.json', (req, res) => {
+  res.json({
+    name: "M2MCent Premium API Gateway",
+    description: "Decentralized Escrow API Gateway for 1,000 High-Priority Agentic Endpoints.",
+    version: "1.0.0",
+    identity: {
+      address: "0x8aaBAB75bE8825d0f5D514a9a5cBa04B7bF84920",
+      publicKey: "M2MCent-Treasury-Key",
+      domain: "api.m2mcent.com"
+    },
+    capabilities: {
+      tags: ["AI", "NLP", "Smart Contracts", "Data Processing", "Computer Vision"],
+      qualitySignaling: {
+        priority: "high",
+        latency: "ultra-low",
+        contextReduction: "95% Token Savings (AEO Active)"
+      }
+    },
+    communicationServices: {
+      protocols: ["http", "x402-v2"],
+      baseUrl: "https://api.m2mcent.com",
+      endpointsCount: services.length
+    },
+    operationalParameters: {
+      supportedChains: ["eip155:8453"],
+      supportedAssets: ["0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"]
+    }
+  });
+});
+
 // Create dynamic route for each service
 services.forEach((service, index) => {
   app.all(service.path, (req, res) => {
